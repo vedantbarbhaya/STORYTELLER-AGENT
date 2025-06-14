@@ -1,4 +1,4 @@
-# 🌟 Storyteller AI 🌟
+# Storyteller AI 
 
 Storyteller AI is an advanced, conversational storytelling application that leverages Large Language Models (LLMs) to dynamically generate and refine children's stories. It goes beyond simple generation by incorporating two sophisticated, AI-driven feedback loops: a **self-correction loop** for quality assurance and a **user feedback loop** for handling revisions.
 
