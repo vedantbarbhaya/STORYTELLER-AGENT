@@ -10,75 +10,7 @@ Storyteller AI is an advanced, conversational storytelling application that leve
 -   **Intelligent User Feedback Processing**: When a user requests a change, a "Feedback Analyzer" AI uses Chain of Thought reasoning to create a structured, multi-step action plan, which is then reliably executed.
 -   **End-to-End Testing**: Includes a `test_flow.sh` script to run a full generation and refinement cycle from the command line.
 
-## Architecture Overview
 
-The application is built around two primary workflows: **Generation & Self-Correction** and **User Feedback & Refinement**. These are orchestrated by a FastAPI backend.
-
-```mermaid
-graph TD
-    %% Styling
-    style Judge fill:#D5FFD5,stroke:#549654,stroke-width:2px,stroke-dasharray: 5 5,color:#000
-    style Analyzer fill:#FFDAB9,stroke:#F79654,stroke-width:2px,stroke-dasharray: 5 5,color:#000
-    style LLM_Calls fill:#FFF2CC,stroke:#D6B656
-    
-    %% Start
-    User([User])
-
-    subgraph " "
-        direction TB
-        
-        %% Flow 1: Generation
-        User -- "1. New Story Prompt" --> Chat[/"/chat" endpoint/]
-        
-        subgraph flow1 [🚀 Generation & Self-Correction]
-            direction TB
-            Chat --> Parser(UnifiedStoryParser)
-            Parser --> ParsedInput[(Parsed Input JSON)]
-            ParsedInput --> ArcGen(ArcGenerator)
-            CreativeEl[(Creative Elements)] --> ArcGen
-            ArcGen --> StoryArc[(StoryArc Model)]
-            StoryArc --> StoryGen1(StoryGenerator)
-            StoryGen1 --> InitialDraft[(Initial Story Draft)]
-            InitialDraft --> Judge(StoryQualityJudge)
-            Judge --> Evaluation[(Score & Feedback)]
-            Evaluation --> Decision{Score < Threshold?}
-            Decision -- "No (OK)" --> FinalStory[(Final Story Text)]
-            Decision -- "Yes (Rewrite)" --> FeedbackToGen[Actionable Feedback]
-            FeedbackToGen --> StoryGen1
-        end
-        
-        FinalStory --> UserResponse1([Story Delivered])
-        UserResponse1 -- "2. User reads story" --> User
-
-        %% Flow 2: Refinement
-        User -- "3. Provides Feedback" --> Refine[/"/refine-with-feedback"/]
-        
-        subgraph flow2 [🗣️ User Feedback & Refinement]
-            direction TB
-            Refine -- "User Feedback, Story, Arc" --> Analyzer(FeedbackAnalyzer)
-            Analyzer -- "Chain of Thought<br/>Planning" --> ActionPlan[(Action Plan JSON)]
-            ActionPlan --> Executor(RefinementExecutor)
-            Executor -- "Aggregates<br/>SECTION_REWRITEs" --> AggregatedFeedback[(Aggregated Feedback)]
-            AggregatedFeedback --> StoryGen2(StoryGenerator)
-            Executor --> RefinedStory[(Refined Story Text)]
-        end
-
-        RefinedStory --> UserResponse2([Refined Story Delivered])
-        UserResponse2 -- "4. User reads refined story" --> User
-    end
-
-    %% Annotations for LLM calls to reduce clutter
-    subgraph "LLM Calls"
-        LLM_Calls(LLM Calls)
-    end
-    
-    Parser -- "LLM" --> LLM_Calls
-    ArcGen -- "LLM" --> LLM_Calls
-    StoryGen1 -- "LLM" --> LLM_Calls
-    Judge -- "LLM" --> LLM_Calls
-    Analyzer -- "LLM" --> LLM_Calls
-    StoryGen2 -- "LLM" --> LLM_Calls
-```
 
 ## How to Run
 
@@ -108,14 +40,10 @@ pip install -r requirements.txt
 
 ### 2. Configuration
 
-Create a `config.py` file inside the `backend/` directory and add your OpenAI API key:
+Create a `.env` file inside the `backend/` directory and add your OpenAI API key:
 
 ```python
-# backend/config.py
 OPENAI_API_KEY = "sk-..." 
-# Optional: You can also tune the model and temperature here
-# OPENAI_MODEL = "gpt-4"
-# OPENAI_TEMPERATURE = 0.7
 ```
 
 ### 3. Running the Server
