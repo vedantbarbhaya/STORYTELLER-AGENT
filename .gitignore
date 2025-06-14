@@ -1,0 +1,24 @@
+# Python artifacts
+backend/__pycache__/
+backend/storyteller-env/
+*.pyc
+*.pyo
+*.pyd
+
+# Configuration files (DO NOT COMMIT SECRETS)
+.env
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE configuration
+.vscode/
+.idea/
+
+# Documentation (optional to commit)
+supporting_docs/
+
+# Temporary files created during development
+capture_logs.sh
+supporting_docs/sample_backend_output.md 

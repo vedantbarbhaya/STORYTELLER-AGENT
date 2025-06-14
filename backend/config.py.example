@@ -1,0 +1,9 @@
+# Rename this file to config.py and add your OpenAI API key.
+# This file is ignored by git to protect your credentials.
+
+OPENAI_API_KEY = "sk-..."
+
+# Optional: You can also tune the model and temperature here.
+# If these are not set, the application will use default values.
+# OPENAI_MODEL = "gpt-4"
+# OPENAI_TEMPERATURE = 0.7 

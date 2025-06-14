@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌟 Story Time Adventure 🌟</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🌟 Story Time Adventure 🌟</h1>
+            <p>Let's create magical stories together!</p>
+        </header>
+
+        <div class="chat-container">
+            <div class="story-display" id="storyDisplay">
+                <div class="welcome-message">
+                    <div class="storyteller-avatar">🧙‍♂️</div>
+                    <div class="message-bubble storyteller">
+                        <p>Hello there, young adventurer! 👋</p>
+                        <p>I'm your magical storyteller! Tell me what kind of story you'd like to hear today. Do you want adventure, animals, magic, or something else exciting?</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-section">
+                <div class="input-container">
+                    <input type="text" id="userInput" placeholder="Tell me what story you want to hear..." maxlength="200">
+                    <button id="sendButton" onclick="sendMessage()">
+                        <span>Send</span>
+                        <span class="send-icon">📤</span>
+                    </button>
+                </div>
+                
+                <div class="quick-actions">
+                    <button class="quick-btn" onclick="quickStory('adventure')">🗡️ Adventure</button>
+                    <button class="quick-btn" onclick="quickStory('animals')">🐾 Animals</button>
+                    <button class="quick-btn" onclick="quickStory('magic')">✨ Magic</button>
+                    <button class="quick-btn" onclick="quickStory('space')">🚀 Space</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="newStoryBtn" onclick="newStory()">🔄 New Story</button>
+            <button id="readAloudBtn" onclick="toggleReadAloud()">🔊 Read Aloud</button>
+        </div>
+    </div>
+
+    <div class="background-decorations">
+        <div class="star">⭐</div>
+        <div class="star">🌟</div>
+        <div class="star">✨</div>
+        <div class="cloud">☁️</div>
+        <div class="cloud">☁️</div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
